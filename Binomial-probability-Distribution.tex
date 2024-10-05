@@ -1,0 +1,908 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Binomial Probability distribution},
+  pdfauthor={Betelhem Getachew},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Binomial Probability distribution}
+\author{Betelhem Getachew}
+\date{2024-04-10}
+
+\begin{document}
+\maketitle
+
+\section{Binomial Distribution: Wikipedia
+Usage}\label{binomial-distribution-wikipedia-usage}
+
+A recent national study showed that approximately 44.7\% of college
+students have used Wikipedia as a source in at least one of their term
+papers. Let X equal the number of students in a random sample of size n
+= 31 who have used Wikipedia as a source.
+
+\subsubsection{Importing necessary
+libraries}\label{importing-necessary-libraries}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Data Given}\label{data-given}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{p}\OtherTok{\textless{}{-}}\FloatTok{0.447}
+\NormalTok{n}\OtherTok{\textless{}{-}}\DecValTok{31}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{How is X distributed?}\label{how-is-x-distributed}
+
+A \textbf{binomial distribution} would be consistent with the random
+variable X's distribution as it is given in the problem. Out of a sample
+size of thirty-one college students, X in this case denotes the
+proportion of students who have used Wikipedia in their term papers.
+
+The use of Wikipedia by each student can be seen as a ``success'' with a
+specific probability (the likelihood of utilizing Wikipedia as a
+source), hence a binomial distribution makes sense in this situation.
+Alternatively, not utilizing Wikipedia would be viewed as a
+``failure''.So there are \textbf{only two outcomes} which are using
+Wikipedia or not using Wikipedia.
+
+Furthermore, the requirements for a binomial distribution are satisfied:
+
+\begin{itemize}
+\item
+  There are a fixed number of trials (the survey included 31 students),
+\item
+  Each trial is independent (the choice of one student has no effect on
+  the decisions of other students),
+\item
+  The success probability (using Wikipedia) remains constant for each
+  student. Therefore, due to these characteristics, the distribution of
+  X follows a binomial distribution.
+\end{itemize}
+
+\textbf{Mean (μ)}: The mean of a binomial distribution is given by the
+formula μ = n * p, where n is the number of trials and p is the
+probability of success on each trial.
+
+\textbf{Variance (σ\^{}2)}: The variance of a binomial distribution is
+given by the formula σ\^{}2 = n * p * (1 - p).
+
+\textbf{Probability Mass Function (PMF)}: The PMF gives the probability
+of obtaining exactly k successes in n trials. It is calculated using the
+formula: P(X = k) = C(n, k) * p\^{}k * (1 - p)\^{}(n - k), where C(n, k)
+is the binomial coefficient, given by C(n, k) = n! / (k! * (n - k)!), p
+is the probability of success, and (1 - p) is the probability of
+failure.
+
+\subsection{Generate and plot the probability mass
+function.}\label{generate-and-plot-the-probability-mass-function.}
+
+PMF stands for Probability Mass Function. In probability theory and
+statistics, the Probability Mass Function is a function that describes
+the probability of each possible outcome of a discrete random variable.
+It assigns a probability to each value that the random variable can
+take.
+
+The PMF satisfies the following properties:
+
+\begin{itemize}
+\item
+  \textbf{Range}: The PMF takes values between 0 and 1 for all possible
+  values of x.
+\item
+  \textbf{Sum of probabilities}: The sum of the probabilities of all
+  possible outcomes is equal to 1. In mathematical terms, ∑ P(X = x) =
+  1, where the sum is taken over all possible values of x.
+\end{itemize}
+
+By evaluating the PMF for different values of x, you can determine the
+likelihood of observing specific outcomes in a discrete random variable.
+
+\subsubsection{Generating PMF}\label{generating-pmf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{num\_of\_wik\_users}\OtherTok{\textless{}{-}}\DecValTok{0}\SpecialCharTok{:}\NormalTok{n}
+\NormalTok{pmf}\OtherTok{\textless{}{-}}\FunctionTok{dbinom}\NormalTok{(num\_of\_wik\_users,n,p)}
+\NormalTok{pmf\_df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{wikipedia\_users=}\NormalTok{num\_of\_wik\_users,}\AttributeTok{pmf=}\NormalTok{pmf)}
+\NormalTok{pmf\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    wikipedia_users          pmf
+## 1                0 1.057984e-08
+## 2                1 2.651082e-07
+## 3                2 3.214377e-06
+## 4                3 2.511632e-05
+## 5                4 1.421138e-04
+## 6                5 6.203153e-04
+## 7                6 2.172786e-03
+## 8                7 6.272510e-03
+## 9                8 1.521055e-02
+## 10               9 3.142047e-02
+## 11              10 5.587504e-02
+## 12              11 8.622373e-02
+## 13              12 1.161604e-01
+## 14              13 1.372305e-01
+## 15              14 1.426190e-01
+## 16              15 1.306524e-01
+## 17              16 1.056088e-01
+## 18              17 7.532248e-02
+## 19              18 4.735464e-02
+## 20              19 2.618995e-02
+## 21              20 1.270189e-02
+## 22              21 5.378041e-03
+## 23              22 1.975986e-03
+## 24              23 6.250013e-04
+## 25              24 1.684000e-04
+## 26              25 3.811382e-05
+## 27              26 7.109560e-06
+## 28              27 1.064220e-06
+## 29              28 1.228898e-07
+## 30              29 1.027594e-08
+## 31              30 5.537484e-10
+## 32              31 1.443887e-11
+\end{verbatim}
+
+\paragraph{Interpretation}\label{interpretation}
+
+The PMF values show a distribution of probability across different
+possible outcomes for a set of 31 students about their use of Wikipedia
+for term papers. With a chance of roughly 14.26\%, the most likely
+single outcome is shown by the peak of this distribution, which happens
+at 14 students utilizing Wikipedia. This implies that in surveys
+administered repeatedly to groups of thirty-one students, we are most
+likely to discover that fourteen or so of them use Wikipedia as a
+research tool. The possibility of very large or very low numbers of
+students relying on Wikipedia diminishes dramatically for outcomes far
+from this peak, as indicated by the probabilities. The predominant
+tendency for this particular activity within the studied population and
+the variety in student behavior are highlighted by this pattern, which
+also highlights the average but acknowledging the spread of different
+behaviors around this average
+
+\subsubsection{Plotting the PMF}\label{plotting-the-pmf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{(pmf\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{wikipedia\_users,}\AttributeTok{y=}\NormalTok{pmf))}\SpecialCharTok{+}
+       \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{fill =} \StringTok{"purple"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Probability Mass Function (PMF)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of students using Wikipedia"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Probability"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Binomial-probability-Distribution_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\paragraph{Interpretation}\label{interpretation-1}
+
+The probability mass function (PMF) values suggest a discrete
+probability distribution that is likely symmetric and centered around a
+specific outcome, in this case, 14 students using Wikipedia. Initially,
+the probabilities for a low number of students using Wikipedia are
+almost negligible, indicating these outcomes are highly unlikely.
+
+As the number of students increases, the probability increases, reaching
+a peak at exactly 14 students. This peak represents the most probable
+outcome within the dataset, with a probability of about 14.26\%,
+indicating that in a typical scenario, 14 students are the most likely
+number to be using Wikipedia for their term papers. Beyond this peak,
+the probabilities decrease as the number of students increases further,
+suggesting that outcomes significantly higher than 14 students are
+progressively less likely. The pattern of these probabilities---rising
+to a peak and then falling---implies a bell-shaped distribution if
+plotted on a graph, with the highest probability centered at 14
+students.
+
+This distribution provides insight into the expected behavior of the
+surveyed group, underscoring that while deviations from the central
+value are possible, they become increasingly unlikely the further away
+they get from this most probable outcome.
+
+\subsection{Generate and plot the cumulative distribution
+function.}\label{generate-and-plot-the-cumulative-distribution-function.}
+
+CDF stands for Cumulative Distribution Function. In probability theory
+and statistics, the Cumulative Distribution Function is a function that
+describes the probability that a random variable takes on a value less
+than or equal to a given value.
+
+The CDF has the following properties:
+
+\begin{itemize}
+\item
+  \textbf{Range}: The CDF takes values between 0 and 1 for all possible
+  values of x.
+\item
+  \textbf{Non-decreasing}: The CDF is a non-decreasing function, meaning
+  that as the value of x increases, the CDF either remains the same or
+  increases.
+\item
+  \textbf{Right-continuous}: The CDF is right-continuous, which means
+  that the limit of the CDF as x approaches a specific value from the
+  right side is equal to the value of the CDF at that point.
+\end{itemize}
+
+The CDF provides cumulative information about the distribution of a
+random variable. By evaluating the CDF at a particular value, you can
+determine the probability that the random variable is less than or equal
+to that value.
+
+\subsubsection{Generating cumulative distribution
+function}\label{generating-cumulative-distribution-function}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cdf}\OtherTok{\textless{}{-}}\FunctionTok{pbinom}\NormalTok{(num\_of\_wik\_users,n,p)}
+\NormalTok{cdf\_df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{wikipedia\_users=}\NormalTok{num\_of\_wik\_users,}\AttributeTok{cdf=}\NormalTok{cdf)}
+\NormalTok{cdf\_df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    wikipedia_users          cdf
+## 1                0 1.057984e-08
+## 2                1 2.756880e-07
+## 3                2 3.490065e-06
+## 4                3 2.860638e-05
+## 5                4 1.707202e-04
+## 6                5 7.910356e-04
+## 7                6 2.963822e-03
+## 8                7 9.236332e-03
+## 9                8 2.444689e-02
+## 10               9 5.586736e-02
+## 11              10 1.117424e-01
+## 12              11 1.979661e-01
+## 13              12 3.141265e-01
+## 14              13 4.513570e-01
+## 15              14 5.939760e-01
+## 16              15 7.246284e-01
+## 17              16 8.302372e-01
+## 18              17 9.055597e-01
+## 19              18 9.529143e-01
+## 20              19 9.791043e-01
+## 21              20 9.918062e-01
+## 22              21 9.971842e-01
+## 23              22 9.991602e-01
+## 24              23 9.997852e-01
+## 25              24 9.999536e-01
+## 26              25 9.999917e-01
+## 27              26 9.999988e-01
+## 28              27 9.999999e-01
+## 29              28 1.000000e+00
+## 30              29 1.000000e+00
+## 31              30 1.000000e+00
+## 32              31 1.000000e+00
+\end{verbatim}
+
+\paragraph{Interpretation}\label{interpretation-2}
+
+The values of the cumulative distribution function (CDF) indicate the
+likelihood that a given value will be less than or equal to the random
+variable, such as the proportion of students that use Wikipedia. As the
+number of students increases, these figures indicate how cumulative
+probabilities behave in a discrete situation by changing from almost
+zero to one.
+
+For instance, based on survey data, there is a 31.41\% chance that up to
+12 students (inclusive) will utilize Wikipedia; the CDF value for 12
+students is roughly 0.3141. The probability increases dramatically to
+approximately 72.46\% when we approach the middle values, such as 15
+students, indicating the accumulating nature of this function.
+
+The CDF value is around 99.18\% by the time we get to 20 students, which
+suggests a strong probability that 20 students or fewer would use
+Wikipedia. At the higher end of the scale, the CDF approaches 1 (or
+100\%), indicating absolute certainty that every student polled will
+utilize Wikipedia (up to the maximum number taken into account in the
+distribution). The cumulative nature of probabilities is exemplified by
+this slow rise from almost zero to one, where each step adds the
+probability of the subsequent particular occurrence, eventually covering
+all potential outcomes within the sample group.
+
+\subsubsection{Plotting the CDF}\label{plotting-the-cdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cdf\_df}\OtherTok{\textless{}{-}}\FunctionTok{data.frame}\NormalTok{(}\AttributeTok{wikipedia\_users=}\NormalTok{num\_of\_wik\_users,}\AttributeTok{cdf=}\NormalTok{cdf)}
+\FunctionTok{ggplot}\NormalTok{(cdf\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{wikipedia\_users,}\AttributeTok{y=}\NormalTok{cdf))}\SpecialCharTok{+}
+  \FunctionTok{geom\_step}\NormalTok{(}\AttributeTok{color =} \StringTok{"purple"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Cumulative Distribution Function (CDF)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of students using Wikipedia"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Cumulative Probability"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Binomial-probability-Distribution_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\paragraph{Interpretation}\label{interpretation-3}
+
+The chance that a randomly selected value from the distribution is less
+than or equal to a given value would be graphically represented by the
+cumulative distribution function (PDF) . With probability close to 0 for
+the lower student counts, the graph would increase very slowly at first
+when it started from the left, suggesting a very slim likelihood that so
+few students would use Wikipedia. In the middle of the distribution, the
+graph's slope steepens, especially in close proximity of the middle
+values, signifying a sharp rise in the cumulative likelihood.
+
+This increase indicates that by the time we get to the middle of the
+distribution, there's a good chance (more than 50\%) that a random
+sample of students who use Wikipedia will be less than this threshold.
+The cumulative probability is then getting close to 100\% as the graph
+reaches the upper levels, at which point it starts to plateau. As a
+result, it becomes very likely that every student polled is at the
+higher end of the distribution. For instance, the cumulative probability
+is over 97\% by the time we get to the figure that corresponds to 20
+students, suggesting a high degree of assurance that up to 20 students
+have utilized Wikipedia.
+
+At some point, the graph approaches and remains at 1 (i.e., 100\%
+probability), signifying total certainty for the highest values found in
+the dataset and demonstrating how almost all observed values will be
+less than or equal to these upper values. The likelihood of various
+outcomes is shown graphically in this graph along with the distribution
+of the number of pupils utilizing Wikipedia.
+
+\subsection{Find the probability that X
+is:}\label{find-the-probability-that-x-is}
+
+\subsubsection{a. equal to 17}\label{a.-equal-to-17}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prob\_equal\_17}\OtherTok{\textless{}{-}}\FunctionTok{dbinom}\NormalTok{(}\DecValTok{17}\NormalTok{,n,p)}
+\NormalTok{prob\_equal\_17}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.07532248
+\end{verbatim}
+
+\paragraph{Visualizing the
+probability}\label{visualizing-the-probability}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Adding a new column to indicate whether the number of students is 17}
+\NormalTok{pmf\_df}\SpecialCharTok{$}\NormalTok{highlight }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(pmf\_df}\SpecialCharTok{$}\NormalTok{wikipedia\_users }\SpecialCharTok{==} \DecValTok{17}\NormalTok{, }\StringTok{"17"}\NormalTok{, }\StringTok{"Other"}\NormalTok{)}
+
+\CommentTok{\# Plotting}
+\FunctionTok{ggplot}\NormalTok{(pmf\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{wikipedia\_users, }\AttributeTok{y=}\NormalTok{pmf, }\AttributeTok{fill=}\NormalTok{highlight)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{"17"}\OtherTok{=}\StringTok{"purple"}\NormalTok{, }\StringTok{"Other"}\OtherTok{=}\StringTok{"gray"}\NormalTok{)) }\SpecialCharTok{+} \CommentTok{\# Custom color: red for 17, purple for others}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Probability Mass Function (PMF)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of Students Using Wikipedia"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Probability"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position=}\StringTok{"none"}\NormalTok{)}\SpecialCharTok{+} \CommentTok{\# Hide legend if not needed}
+\FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{max}\NormalTok{(pmf\_df}\SpecialCharTok{$}\NormalTok{wikipedia\_users), }\AttributeTok{by =} \DecValTok{5}\NormalTok{))  }\CommentTok{\# Adjust the max value as needed}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Binomial-probability-Distribution_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\paragraph{Interpretation}\label{interpretation-4}
+
+The dbinom function result of 0.07532248 indicates the likelihood that,
+given the individual probability of success for each student, exactly 17
+students out of a sample size of 31 will use Wikipedia as a source in
+their term papers. Based on this likelihood, there is around a 7.53\%
+chance that, out of the sample given, exactly 17 students will be using
+Wikipedia. This interpretation clarifies the precise probability that
+the 31 students who were polled would experience this particular
+outcome, providing insight into the probability distribution for varying
+student usage of Wikipedia in relation to the problem.
+
+\subsubsection{b. at most 13}\label{b.-at-most-13}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prob\_atmost\_13}\OtherTok{\textless{}{-}}\FunctionTok{pbinom}\NormalTok{(}\DecValTok{13}\NormalTok{,n,p)}
+\NormalTok{prob\_atmost\_13}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.451357
+\end{verbatim}
+
+\paragraph{Interpretation}\label{interpretation-5}
+
+The answer to pbinom(13,n,p) is 0.451357, it means that, given the
+probability of success p for each individual trial, the cumulative
+probability of witnessing, among a sample size of n students, at most 13
+successes (students accessing Wikipedia) is roughly 45.14\%. According
+to this, there is a 45.14\% likelihood that in the sample provided, 13
+or fewer pupils would be seen reading Wikipedia. To put it practically,
+this indicates that, given the sample size and conditions given in the
+problem, there is a somewhat reasonable chance of coming across 13 or
+fewer students who utilize Wikipedia. This explanation sheds light on
+the possibility that this particular range of events would materialize
+and emphasizes its importance in the distribution of probability for
+various numbers.
+
+\paragraph{Visualizing the
+probability}\label{visualizing-the-probability-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create a new column in pmf\_df to indicate if the outcome is less than or equal to 13}
+\NormalTok{pmf\_df}\SpecialCharTok{$}\NormalTok{highlight }\OtherTok{\textless{}{-}}\NormalTok{ pmf\_df}\SpecialCharTok{$}\NormalTok{wikipedia\_users }\SpecialCharTok{\textless{}=} \DecValTok{13}
+
+\CommentTok{\# Plotting the bar chart}
+\FunctionTok{ggplot}\NormalTok{(pmf\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wikipedia\_users, }\AttributeTok{y =}\NormalTok{ pmf, }\AttributeTok{fill =}\NormalTok{ highlight)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# you can adjust width for appearance}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"gray"}\NormalTok{, }\StringTok{"purple"}\NormalTok{)) }\SpecialCharTok{+}  \CommentTok{\# non{-}highlighted in gray, highlighted in red}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Cumulative Probability of Students Using Wikipedia (Up to 13)"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Purple bars represent P(X ≤ 13)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of Wikipedia Users"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Probability"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{max}\NormalTok{(pmf\_df}\SpecialCharTok{$}\NormalTok{wikipedia\_users), }\AttributeTok{by =} \DecValTok{5}\NormalTok{))  }\CommentTok{\# Adjust the max value as needed}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: The `<scale>` argument of `guides()` cannot be `FALSE`. Use "none" instead as
+## of ggplot2 3.3.4.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+## generated.
+\end{verbatim}
+
+\includegraphics{Binomial-probability-Distribution_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+\paragraph{Interpreting the
+visualization}\label{interpreting-the-visualization}
+
+Plotting the probability distribution of the number of students using
+Wikipedia, with a particular emphasis on the chance of seeing up to 13
+users, is done on the graph. We aim to give a clear and succinct picture
+of how frequently lower user numbers occur within the distribution
+overall by showing this data graphically. We sum the probabilities
+associated with each user count from zero to thirteen, as shown by the
+purple bars, to find the likelihood that 13 or fewer pupils would use
+Wikipedia.
+
+The cumulative chance that no more than 13 pupils use Wikipedia is
+represented by these highlighted purple bars in the graph.
+
+The cumulative probability for this range is the total of all the bars,
+each of which represents the probability that precisely that many
+students will be users. With this visual aid, one can quickly gain
+insight into the bottom end of the user distribution and comprehend the
+overall significance of these probabilities. This method is especially
+helpful for administrators and planners of education who have to
+evaluate and control student use of the internet and resource
+requirements depending on their engagement with learning resources such
+as Wikipedia.
+
+\subsubsection{c.~greater than 11.}\label{c.-greater-than-11.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prob\_greater\_than\_11}\OtherTok{\textless{}{-}} \DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pbinom}\NormalTok{(}\DecValTok{11}\NormalTok{,n,p)}
+\NormalTok{prob\_greater\_than\_11}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.8020339
+\end{verbatim}
+
+\paragraph{Interpretation}\label{interpretation-6}
+
+1−pbinom(11,n,p)=0.8020339, then given the probability of success p for
+each individual trial, the cumulative probability of witnessing more
+than 11 successes (students utilizing Wikipedia) out of a sample size of
+n students is roughly 0.8020339, or 80.20\%. This suggests that, in the
+provided sample, there is approximately an 80.20\% likelihood of seeing
+more than 11 pupils utilizing Wikipedia. In real words, this indicates
+that, within the given sample size and under the problem's parameters,
+there is a reasonable chance of coming across more than 11 pupils who
+utilize Wikipedia. This interpretation highlights the significance of
+this particular range of outcomes within the distribution of probability
+for varying numbers of students accessing Wikipedia and sheds light on
+the chance that they will occur.
+
+\paragraph{Visualizing the
+probability}\label{visualizing-the-probability-2}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create a data frame for plotting}
+\NormalTok{prob\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Students =} \DecValTok{0}\SpecialCharTok{:}\NormalTok{n,}
+  \AttributeTok{Probability =} \FunctionTok{dbinom}\NormalTok{(}\DecValTok{0}\SpecialCharTok{:}\NormalTok{n, n, p)}
+\NormalTok{)}
+
+\CommentTok{\# Plotting the bar chart}
+\FunctionTok{ggplot}\NormalTok{(prob\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Students, }\AttributeTok{y =}\NormalTok{ Probability, }\AttributeTok{fill =}\NormalTok{ Students }\SpecialCharTok{\textgreater{}} \DecValTok{11}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"gray"}\NormalTok{, }\StringTok{"purple"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Probability of Number of Students Using Wikipedia"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Purple bars represent P(X \textgreater{} 11)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of Students"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Probability"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Binomial-probability-Distribution_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\paragraph{Interpreting the
+visualization}\label{interpreting-the-visualization-1}
+
+\paragraph{Interpretation}\label{interpretation-7}
+
+1−pbinom(11,n,p)=0.8020339, then given the probability of success p for
+each individual trial, the cumulative probability of witnessing more
+than 11 successes (students utilizing Wikipedia) out of a sample size of
+n students is roughly 0.8020339, or 80.20\%. This suggests that, in the
+provided sample, there is approximately an 80.20\% likelihood of seeing
+more than 11 pupils utilizing Wikipedia. In real words, this indicates
+that, within the given sample size and under the problem's parameters,
+there is a reasonable chance of coming across more than 11 pupils who
+utilize Wikipedia. This interpretation highlights the significance of
+this particular range of outcomes within the distribution of probability
+for varying numbers of students accessing Wikipedia and sheds light on
+the chance that they will occur.
+
+The probability for 11 or fewer users are represented by the gray bars,
+which create a visual contrast that highlights the less likely options
+in this case.
+
+The cumulative likelihood of having more than 11 students accessing
+Wikipedia can be obtained by summing the probabilities of the purple
+bars. This graphic not only provides a clear understanding of the
+probability mass function, but it also helps with managing internet
+bandwidth, allocating resources, and making decisions about educational
+projects that depend on student involvement in Wikipedia and other
+online resources.
+
+\subsubsection{d.~at least 15}\label{d.-at-least-15}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prob\_atleast\_15}\OtherTok{\textless{}{-}}\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pbinom}\NormalTok{(}\DecValTok{14}\NormalTok{,n,p)}
+\NormalTok{prob\_atleast\_15}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.406024
+\end{verbatim}
+
+\paragraph{Interpretation}\label{interpretation-8}
+
+If 1−pbinom(14,n,p)=0.406024, it indicates that, given the probability
+of success p for each individual trial, the cumulative probability of
+witnessing at least 15 successes (students utilizing Wikipedia) out of a
+sample size of n students is roughly 0.406024, or 40.60\%. According to
+this, there is a 40.60\% chance that in the sample provided, 15 or more
+pupils would be seen using Wikipedia. In real words, this indicates
+that, given the sample size and conditions given in the issue statement,
+there is a moderate chance of coming across at least 15 students who
+utilize Wikipedia. This explanation sheds light on the possibility of
+seeing this particular range of results and emphasizes its significance
+in the probability distribution for various student populations
+utilizing Wikipedia.
+
+\paragraph{Visualizing the
+probability}\label{visualizing-the-probability-3}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Adding a column to the pmf\_df to indicate if the outcome is 15 or more}
+\NormalTok{pmf\_df}\SpecialCharTok{$}\NormalTok{highlight }\OtherTok{\textless{}{-}}\NormalTok{ pmf\_df}\SpecialCharTok{$}\NormalTok{wikipedia\_users }\SpecialCharTok{\textgreater{}=} \DecValTok{15}
+
+\CommentTok{\# Plotting the bar chart}
+\FunctionTok{ggplot}\NormalTok{(pmf\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wikipedia\_users, }\AttributeTok{y =}\NormalTok{ pmf, }\AttributeTok{fill =}\NormalTok{ highlight)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Adjust width for appearance}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"gray"}\NormalTok{, }\StringTok{"purple"}\NormalTok{)) }\SpecialCharTok{+}  \CommentTok{\# non{-}highlighted in gray, highlighted in blue}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Probability of At Least 15 Students Using Wikipedia"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Purple bars represent P(X ≥ 15)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of Wikipedia Users"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Probability"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{guides}\NormalTok{(}\AttributeTok{fill =} \ConstantTok{FALSE}\NormalTok{)}\SpecialCharTok{+} \CommentTok{\# Optionally remove the legend if not needed}
+   \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{max}\NormalTok{(pmf\_df}\SpecialCharTok{$}\NormalTok{wikipedia\_users), }\AttributeTok{by =} \DecValTok{5}\NormalTok{))  }\CommentTok{\# Adjust the max value as needed}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Binomial-probability-Distribution_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\paragraph{Interpreting the
+visualization}\label{interpreting-the-visualization-2}
+
+This graph is designed to visually represent the probability
+distribution for the number of students using Wikipedia, with a specific
+emphasis on those scenarios where at least 15 students are engaged with
+wikipedia.
+
+In the visualization, the purple bars distinctly mark the probabilities
+where the number of students using Wikipedia is 15 or more. Each of
+these bars corresponds to a specific count starting from 15 up to the
+maximum possible number.The cumulative likelihood of having more than 11
+students accessing Wikipedia can be obtained by *summing the
+probabilities** of the purple bars The gray bars, in contrast, represent
+counts of fewer than 15 students, providing a visual baseline against
+which to compare the higher counts.
+
+By focusing on the purple bars, one can grasp the cumulative probability
+of encountering situations where the number of Wikipedia users meets or
+exceeds 15. This graphic presentation is particularly useful for
+understanding the tail behavior of the distribution at higher values.
+Such insights can be valuable in scenarios such as planning for
+educational tools and resources, where understanding student engagement
+at higher levels is crucial for effective implementation and support.
+
+\subsubsection{e. between 16 and 19,
+inclusive}\label{e.-between-16-and-19-inclusive}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{prob\_between\_16\_19}\OtherTok{\textless{}{-}}\FunctionTok{pbinom}\NormalTok{(}\DecValTok{19}\NormalTok{,n,p)}\SpecialCharTok{{-}}\FunctionTok{pbinom}\NormalTok{(}\DecValTok{15}\NormalTok{,n,p)}
+\NormalTok{prob\_between\_16\_19}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.2544758
+\end{verbatim}
+
+\paragraph{Interpretation}\label{interpretation-9}
+
+If pbinom(19,n,p)−pbinom(15,n,p)=0.2544758, it indicates that, given the
+probability of success p for each individual trial, the cumulative
+probability of witnessing between 16 and 19 successes (students
+utilizing Wikipedia) out of a sample size of n students is roughly
+0.2544758, or 25.45\%. This suggests that in the provided sample, there
+is roughly a 25.45\% chance of seeing between 16 and 19 pupils utilizing
+Wikipedia.
+
+Practically speaking, this indicates that, given the problem's stated
+sample size and conditions, there is a modest chance of running into
+this particular range of outcomes. This explanation sheds light on the
+possibility of seeing this specific range of accomplishments and
+emphasizes its importance in the probability distribution for various
+student Wikipedia usage counts.
+
+\paragraph{Visualizing the
+Probability}\label{visualizing-the-probability-4}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Assuming pmf\_df is your data frame with columns wikipedia\_users and pmf}
+\FunctionTok{ggplot}\NormalTok{(pmf\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ wikipedia\_users, }\AttributeTok{y =}\NormalTok{ pmf, }\AttributeTok{fill =}\NormalTok{ (wikipedia\_users }\SpecialCharTok{\textgreater{}=} \DecValTok{16} \SpecialCharTok{\&}\NormalTok{ wikipedia\_users }\SpecialCharTok{\textless{}=} \DecValTok{19}\NormalTok{))) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{width =} \FloatTok{0.5}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"gray"}\NormalTok{, }\StringTok{"purple"}\NormalTok{), }
+                    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Other values"}\NormalTok{, }\StringTok{"Values between 16 and 19"}\NormalTok{),}
+                    \AttributeTok{guide =} \FunctionTok{guide\_legend}\NormalTok{(}\AttributeTok{title =} \StringTok{"Category"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Probability Mass Function (PMF) Highlighting P(16 ≤ X ≤ 19)"}\NormalTok{,}
+       \AttributeTok{subtitle =} \StringTok{"Purple bars represent P(16 ≤ X ≤ 19)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Number of students using Wikipedia"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Probability"}\NormalTok{,}
+       \AttributeTok{fill =} \StringTok{"Category"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\FunctionTok{max}\NormalTok{(pmf\_df}\SpecialCharTok{$}\NormalTok{wikipedia\_users), }\AttributeTok{by =} \DecValTok{5}\NormalTok{))  }\CommentTok{\# Setting x{-}axis breaks}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Binomial-probability-Distribution_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\paragraph{Interpreting the
+probabilities}\label{interpreting-the-probabilities}
+
+To understand the cumulative probability of having between 16 and 19
+students using Wikipedia, the graph efficiently aggregates and displays
+the individual probabilities associated with each student count within
+this range. By highlighting the bars corresponding to 16, 17, 18, and 19
+students in purple, the graph visually segments this subset from the
+rest of the data. To derive the cumulative probability of this specific
+event (P(16 ≤ X ≤ 19)), one would need to sum the probabilities of these
+four outcomes.
+
+The cumulative probability can be understood as the sum of the heights
+of the purple bars, offering an intuitive means of assessing the
+likelihood of encountering a group size within this defined range.
+Through this approach, the graph serves not only as a representation of
+the distribution but also as a practical tool for estimating cumulative
+probabilities within specific intervals, making complex statistical
+concepts more accessible.
+
+\subsection{Give the mean of X, denoted
+E(X).}\label{give-the-mean-of-x-denoted-ex.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{mean\_X }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{*}\NormalTok{ p}
+\NormalTok{mean\_X}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 13.857
+\end{verbatim}
+
+\subsubsection{Interpretation}\label{interpretation-10}
+
+According to the results, 13.857 students out of 31 are estimated to
+have used Wikipedia as a source for their term papers on average, based
+on the expected value of the number of students using Wikipedia in a
+sample of size 31. Although a fraction of a student is not feasible in
+practice, this figure shows the theoretical average result over multiple
+survey iterations with the same sample size. Essentially, the average
+number of students accessing Wikipedia would tend to converge around
+13.857 if the study were repeated with groups of n students.
+
+As a core trend, this predicted value shows the typical result while
+acknowledging that the actual number of pupils utilizing Wikipedia in
+each sample may vary around this mean.
+
+\subsection{Give the variance and standard deviation of
+X.}\label{give-the-variance-and-standard-deviation-of-x.}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{variance\_x}\OtherTok{\textless{}{-}}\NormalTok{n}\SpecialCharTok{*}\NormalTok{p}\SpecialCharTok{*}\NormalTok{(}\DecValTok{1}\SpecialCharTok{{-}}\NormalTok{p)}
+\NormalTok{variance\_x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 7.662921
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sd\_x}\OtherTok{\textless{}{-}}\FunctionTok{sqrt}\NormalTok{(variance\_x)}
+\NormalTok{sd\_x}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 2.768198
+\end{verbatim}
+
+\subsubsection{Interpretation}\label{interpretation-11}
+
+n a sample of size n, the variance, calculated at roughly 7.662921,
+denotes the average squared deviation of the number of students
+utilizing Wikipedia from their expected value of approximately 13.857.
+This measure expresses the degree of variation or dispersion around the
+distribution mean value. In the meantime, a more comprehensible
+representation of this dispersion is provided by the standard deviation,
+which is estimated to be around 2.768198. It shows how far each
+individual observation deviates from the mean on average, giving a clear
+picture of how the data points are distributed around the average.
+
+In this particular situation, a standard deviation of 2.768198 indicates
+that there should be an average deviation of approximately 2.768198
+units from the mean in the number of students utilizing
+Wikipedia.Together, these statistical variables express the level of
+uncertainty surrounding the number of students use Wikipedia within the
+given sample size and under the problem's defined criteria. Greater
+variability in the data is indicated by a higher variance and standard
+deviation, which highlights the significance of taking this variability
+into account in any analysis or decision-making process and reflects a
+wider range of possible outcomes.
+
+\end{document}

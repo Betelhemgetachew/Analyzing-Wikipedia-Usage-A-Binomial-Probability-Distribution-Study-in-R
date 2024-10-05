@@ -1,0 +1,360 @@
+---
+title: "Binomial Probability distribution"
+author: "Betelhem Getachew"
+date: "2024-07-10"
+output: pdf_document
+---
+
+# Binomial Distribution: Wikipedia Usage
+
+A recent national study showed that approximately 44.7% of college students have used Wikipedia as a source in at least one of their term papers. Let X equal the number of students in a random sample of size n = 31 who have used Wikipedia as a source.
+
+### Importing necessary libraries
+
+```{r warning = FALSE, message = FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+### Data Given
+
+```{r}
+p<-0.447
+n<-31
+```
+
+## How is X distributed?
+
+A **binomial distribution** would be consistent with the random variable X's distribution as it is given in the problem. Out of a sample size of thirty-one college students, X in this case denotes the proportion of students who have used Wikipedia in their term papers.
+
+The use of Wikipedia by each student can be seen as a "success" with a specific probability (the likelihood of utilizing Wikipedia as a source), hence a binomial distribution makes sense in this situation. Alternatively, not utilizing Wikipedia would be viewed as a "failure".So there are **only two outcomes** which are using Wikipedia or not using Wikipedia.
+
+Furthermore, the requirements for a binomial distribution are satisfied:
+
+-   There are a fixed number of trials (the survey included 31 students),
+
+-   Each trial is independent (the choice of one student has no effect on the decisions of other students),
+
+-   The success probability (using Wikipedia) remains constant for each student. Therefore, due to these characteristics, the distribution of X follows a binomial distribution.
+
+**Mean (μ)**: The mean of a binomial distribution is given by the formula μ = n \* p, where n is the number of trials and p is the probability of success on each trial.
+
+**Variance (σ\^2)**: The variance of a binomial distribution is given by the formula σ\^2 = n \* p \* (1 - p).
+
+**Probability Mass Function (PMF)**: The PMF gives the probability of obtaining exactly k successes in n trials. It is calculated using the formula: P(X = k) = C(n, k) \* p\^k \* (1 - p)\^(n - k), where C(n, k) is the binomial coefficient, given by C(n, k) = n! / (k! \* (n - k)!), p is the probability of success, and (1 - p) is the probability of failure.
+
+## Generate and plot the probability mass function.
+
+PMF stands for Probability Mass Function. In probability theory and statistics, the Probability Mass Function is a function that describes the probability of each possible outcome of a discrete random variable. It assigns a probability to each value that the random variable can take.
+
+The PMF satisfies the following properties:
+
+-   **Range**: The PMF takes values between 0 and 1 for all possible values of x.
+
+-   **Sum of probabilities**: The sum of the probabilities of all possible outcomes is equal to 1. In mathematical terms, ∑ P(X = x) = 1, where the sum is taken over all possible values of x.
+
+By evaluating the PMF for different values of x, you can determine the likelihood of observing specific outcomes in a discrete random variable.
+
+### Generating PMF
+
+```{r}
+num_of_wik_users<-0:n
+pmf<-dbinom(num_of_wik_users,n,p)
+pmf_df<-data.frame(wikipedia_users=num_of_wik_users,pmf=pmf)
+pmf_df
+```
+
+#### Interpretation
+
+The PMF values show a distribution of probability across different possible outcomes for a set of 31 students about their use of Wikipedia for term papers. With a chance of roughly 14.26%, the most likely single outcome is shown by the peak of this distribution, which happens at 14 students utilizing Wikipedia. This implies that in surveys administered repeatedly to groups of thirty-one students, we are most likely to discover that fourteen or so of them use Wikipedia as a research tool. The possibility of very large or very low numbers of students relying on Wikipedia diminishes dramatically for outcomes far from this peak, as indicated by the probabilities. The predominant tendency for this particular activity within the studied population and the variety in student behavior are highlighted by this pattern, which also highlights the average but acknowledging the spread of different behaviors around this average
+
+### Plotting the PMF
+
+```{r}
+ggplot(pmf_df,aes(x=wikipedia_users,y=pmf))+
+       geom_bar(stat = "identity", fill = "purple", width = 0.7) +
+  labs(title = "Probability Mass Function (PMF)",
+       x = "Number of students using Wikipedia",
+       y = "Probability") +
+  theme_minimal()
+```
+
+#### Interpretation
+
+The probability mass function (PMF) values suggest a discrete probability distribution that is likely symmetric and centered around a specific outcome, in this case, 14 students using Wikipedia. Initially, the probabilities for a low number of students using Wikipedia are almost negligible, indicating these outcomes are highly unlikely.
+
+As the number of students increases, the probability increases, reaching a peak at exactly 14 students. This peak represents the most probable outcome within the dataset, with a probability of about 14.26%, indicating that in a typical scenario, 14 students are the most likely number to be using Wikipedia for their term papers. Beyond this peak, the probabilities decrease as the number of students increases further, suggesting that outcomes significantly higher than 14 students are progressively less likely. The pattern of these probabilities—rising to a peak and then falling—implies a bell-shaped distribution if plotted on a graph, with the highest probability centered at 14 students.
+
+This distribution provides insight into the expected behavior of the surveyed group, underscoring that while deviations from the central value are possible, they become increasingly unlikely the further away they get from this most probable outcome.
+
+## Generate and plot the cumulative distribution function.
+
+CDF stands for Cumulative Distribution Function. In probability theory and statistics, the Cumulative Distribution Function is a function that describes the probability that a random variable takes on a value less than or equal to a given value.
+
+The CDF has the following properties:
+
+-   **Range**: The CDF takes values between 0 and 1 for all possible values of x.
+
+-   **Non-decreasing**: The CDF is a non-decreasing function, meaning that as the value of x increases, the CDF either remains the same or increases.
+
+-   **Right-continuous**: The CDF is right-continuous, which means that the limit of the CDF as x approaches a specific value from the right side is equal to the value of the CDF at that point.
+
+The CDF provides cumulative information about the distribution of a random variable. By evaluating the CDF at a particular value, you can determine the probability that the random variable is less than or equal to that value.
+
+### Generating cumulative distribution function
+
+```{r}
+cdf<-pbinom(num_of_wik_users,n,p)
+cdf_df<-data.frame(wikipedia_users=num_of_wik_users,cdf=cdf)
+cdf_df
+```
+
+#### Interpretation
+
+The values of the cumulative distribution function (CDF) indicate the likelihood that a given value will be less than or equal to the random variable, such as the proportion of students that use Wikipedia. As the number of students increases, these figures indicate how cumulative probabilities behave in a discrete situation by changing from almost zero to one.
+
+For instance, based on survey data, there is a 31.41% chance that up to 12 students (inclusive) will utilize Wikipedia; the CDF value for 12 students is roughly 0.3141. The probability increases dramatically to approximately 72.46% when we approach the middle values, such as 15 students, indicating the accumulating nature of this function.
+
+The CDF value is around 99.18% by the time we get to 20 students, which suggests a strong probability that 20 students or fewer would use Wikipedia. At the higher end of the scale, the CDF approaches 1 (or 100%), indicating absolute certainty that every student polled will utilize Wikipedia (up to the maximum number taken into account in the distribution). The cumulative nature of probabilities is exemplified by this slow rise from almost zero to one, where each step adds the probability of the subsequent particular occurrence, eventually covering all potential outcomes within the sample group.
+
+### Plotting the CDF
+
+```{r}
+cdf_df<-data.frame(wikipedia_users=num_of_wik_users,cdf=cdf)
+ggplot(cdf_df,aes(x=wikipedia_users,y=cdf))+
+  geom_step(color = "purple") +
+  labs(title = "Cumulative Distribution Function (CDF)",
+       x = "Number of students using Wikipedia",
+       y = "Cumulative Probability") +
+  theme_minimal()
+```
+
+#### Interpretation
+
+The chance that a randomly selected value from the distribution is less than or equal to a given value would be graphically represented by the cumulative distribution function (PDF) . With probability close to 0 for the lower student counts, the graph would increase very slowly at first when it started from the left, suggesting a very slim likelihood that so few students would use Wikipedia. In the middle of the distribution, the graph's slope steepens, especially in close proximity of the middle values, signifying a sharp rise in the cumulative likelihood.
+
+This increase indicates that by the time we get to the middle of the distribution, there's a good chance (more than 50%) that a random sample of students who use Wikipedia will be less than this threshold. The cumulative probability is then getting close to 100% as the graph reaches the upper levels, at which point it starts to plateau. As a result, it becomes very likely that every student polled is at the higher end of the distribution. For instance, the cumulative probability is over 97% by the time we get to the figure that corresponds to 20 students, suggesting a high degree of assurance that up to 20 students have utilized Wikipedia.
+
+At some point, the graph approaches and remains at 1 (i.e., 100% probability), signifying total certainty for the highest values found in the dataset and demonstrating how almost all observed values will be less than or equal to these upper values. The likelihood of various outcomes is shown graphically in this graph along with the distribution of the number of pupils utilizing Wikipedia.
+
+## Find the probability that X is:
+
+### a. equal to 17
+
+```{r}
+prob_equal_17<-dbinom(17,n,p)
+prob_equal_17
+```
+
+#### Visualizing the probability
+
+```{r}
+# Adding a new column to indicate whether the number of students is 17
+pmf_df$highlight <- ifelse(pmf_df$wikipedia_users == 17, "17", "Other")
+
+# Plotting
+ggplot(pmf_df, aes(x=wikipedia_users, y=pmf, fill=highlight)) +
+  geom_bar(stat = "identity", width = 0.7) +
+  scale_fill_manual(values=c("17"="purple", "Other"="gray")) + # Custom color: red for 17, purple for others
+  labs(title = "Probability Mass Function (PMF)",
+       x = "Number of Students Using Wikipedia",
+       y = "Probability") +
+  theme_minimal() +
+  theme(legend.position="none")+ # Hide legend if not needed
+scale_x_continuous(breaks = seq(0, max(pmf_df$wikipedia_users), by = 5))  # Adjust the max value as needed
+```
+
+#### Interpretation
+
+The dbinom function result of 0.07532248 indicates the likelihood that, given the individual probability of success for each student, exactly 17 students out of a sample size of 31 will use Wikipedia as a source in their term papers. Based on this likelihood, there is around a 7.53% chance that, out of the sample given, exactly 17 students will be using Wikipedia. This interpretation clarifies the precise probability that the 31 students who were polled would experience this particular outcome, providing insight into the probability distribution for varying student usage of Wikipedia in relation to the problem.
+
+### b. at most 13
+
+```{r}
+prob_atmost_13<-pbinom(13,n,p)
+prob_atmost_13
+
+```
+
+#### Interpretation
+
+The answer to pbinom(13,n,p) is 0.451357, it means that, given the probability of success p for each individual trial, the cumulative probability of witnessing, among a sample size of n students, at most 13 successes (students accessing Wikipedia) is roughly 45.14%. According to this, there is a 45.14% likelihood that in the sample provided, 13 or fewer pupils would be seen reading Wikipedia. To put it practically, this indicates that, given the sample size and conditions given in the problem, there is a somewhat reasonable chance of coming across 13 or fewer students who utilize Wikipedia. This explanation sheds light on the possibility that this particular range of events would materialize and emphasizes its importance in the distribution of probability for various numbers.
+
+#### Visualizing the probability
+
+```{r}
+# Create a new column in pmf_df to indicate if the outcome is less than or equal to 13
+pmf_df$highlight <- pmf_df$wikipedia_users <= 13
+
+# Plotting the bar chart
+ggplot(pmf_df, aes(x = wikipedia_users, y = pmf, fill = highlight)) +
+  geom_bar(stat = "identity", width = 0.7) +  # you can adjust width for appearance
+  scale_fill_manual(values = c("gray", "purple")) +  # non-highlighted in gray, highlighted in red
+  labs(title = "Cumulative Probability of Students Using Wikipedia (Up to 13)",
+       subtitle = "Purple bars represent P(X ≤ 13)",
+       x = "Number of Wikipedia Users",
+       y = "Probability") +
+  theme_minimal() +
+  guides(fill = FALSE)+
+  scale_x_continuous(breaks = seq(0, max(pmf_df$wikipedia_users), by = 5))  # Adjust the max value as needed
+
+```
+
+#### Interpreting the visualization
+
+Plotting the probability distribution of the number of students using Wikipedia, with a particular emphasis on the chance of seeing up to 13 users, is done on the graph. We aim to give a clear and succinct picture of how frequently lower user numbers occur within the distribution overall by showing this data graphically. We sum the probabilities associated with each user count from zero to thirteen, as shown by the purple bars, to find the likelihood that 13 or fewer pupils would use Wikipedia.
+
+The cumulative chance that no more than 13 pupils use Wikipedia is represented by these highlighted purple bars in the graph.
+
+The cumulative probability for this range is the total of all the bars, each of which represents the probability that precisely that many students will be users. With this visual aid, one can quickly gain insight into the bottom end of the user distribution and comprehend the overall significance of these probabilities. This method is especially helpful for administrators and planners of education who have to evaluate and control student use of the internet and resource requirements depending on their engagement with learning resources such as Wikipedia.
+
+### c. greater than 11.
+
+```{r}
+prob_greater_than_11<- 1-pbinom(11,n,p)
+prob_greater_than_11
+
+```
+
+#### Interpretation
+
+1−pbinom(11,n,p)=0.8020339, then given the probability of success p for each individual trial, the cumulative probability of witnessing more than 11 successes (students utilizing Wikipedia) out of a sample size of n students is roughly 0.8020339, or 80.20%. This suggests that, in the provided sample, there is approximately an 80.20% likelihood of seeing more than 11 pupils utilizing Wikipedia. In real words, this indicates that, within the given sample size and under the problem's parameters, there is a reasonable chance of coming across more than 11 pupils who utilize Wikipedia. This interpretation highlights the significance of this particular range of outcomes within the distribution of probability for varying numbers of students accessing Wikipedia and sheds light on the chance that they will occur.
+
+#### Visualizing the probability
+
+```{r}
+
+# Create a data frame for plotting
+prob_data <- data.frame(
+  Students = 0:n,
+  Probability = dbinom(0:n, n, p)
+)
+
+# Plotting the bar chart
+ggplot(prob_data, aes(x = Students, y = Probability, fill = Students > 11)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual(values = c("gray", "purple")) +
+  labs(title = "Probability of Number of Students Using Wikipedia",
+       subtitle = "Purple bars represent P(X > 11)",
+       x = "Number of Students",
+       y = "Probability") +
+  theme_minimal()
+```
+
+#### Interpreting the visualization
+
+#### Interpretation
+
+1−pbinom(11,n,p)=0.8020339, then given the probability of success p for each individual trial, the cumulative probability of witnessing more than 11 successes (students utilizing Wikipedia) out of a sample size of n students is roughly 0.8020339, or 80.20%. This suggests that, in the provided sample, there is approximately an 80.20% likelihood of seeing more than 11 pupils utilizing Wikipedia. In real words, this indicates that, within the given sample size and under the problem's parameters, there is a reasonable chance of coming across more than 11 pupils who utilize Wikipedia. This interpretation highlights the significance of this particular range of outcomes within the distribution of probability for varying numbers of students accessing Wikipedia and sheds light on the chance that they will occur.
+
+The probability for 11 or fewer users are represented by the gray bars, which create a visual contrast that highlights the less likely options in this case.
+
+The cumulative likelihood of having more than 11 students accessing Wikipedia can be obtained by summing the probabilities of the purple bars. This graphic not only provides a clear understanding of the probability mass function, but it also helps with managing internet bandwidth, allocating resources, and making decisions about educational projects that depend on student involvement in Wikipedia and other online resources.
+
+### d. at least 15
+
+```{r}
+prob_atleast_15<-1-pbinom(14,n,p)
+prob_atleast_15
+```
+
+#### Interpretation
+
+If 1−pbinom(14,n,p)=0.406024, it indicates that, given the probability of success p for each individual trial, the cumulative probability of witnessing at least 15 successes (students utilizing Wikipedia) out of a sample size of n students is roughly 0.406024, or 40.60%. According to this, there is a 40.60% chance that in the sample provided, 15 or more pupils would be seen using Wikipedia. In real words, this indicates that, given the sample size and conditions given in the issue statement, there is a moderate chance of coming across at least 15 students who utilize Wikipedia. This explanation sheds light on the possibility of seeing this particular range of results and emphasizes its significance in the probability distribution for various student populations utilizing Wikipedia.
+
+#### Visualizing the probability
+
+```{r}
+# Adding a column to the pmf_df to indicate if the outcome is 15 or more
+pmf_df$highlight <- pmf_df$wikipedia_users >= 15
+
+# Plotting the bar chart
+ggplot(pmf_df, aes(x = wikipedia_users, y = pmf, fill = highlight)) +
+  geom_bar(stat = "identity", width = 0.7) +  # Adjust width for appearance
+  scale_fill_manual(values = c("gray", "purple")) +  # non-highlighted in gray, highlighted in blue
+  labs(title = "Probability of At Least 15 Students Using Wikipedia",
+       subtitle = "Purple bars represent P(X ≥ 15)",
+       x = "Number of Wikipedia Users",
+       y = "Probability") +
+  theme_minimal() +
+  guides(fill = FALSE)+ # Optionally remove the legend if not needed
+   scale_x_continuous(breaks = seq(0, max(pmf_df$wikipedia_users), by = 5))  # Adjust the max value as needed
+
+```
+
+#### Interpreting the visualization
+
+This graph is designed to visually represent the probability distribution for the number of students using Wikipedia, with a specific emphasis on those scenarios where at least 15 students are engaged with wikipedia.
+
+In the visualization, the purple bars distinctly mark the probabilities where the number of students using Wikipedia is 15 or more. Each of these bars corresponds to a specific count starting from 15 up to the maximum possible number.The cumulative likelihood of having more than 11 students accessing Wikipedia can be obtained by \*summing the probabilities\*\* of the purple bars The gray bars, in contrast, represent counts of fewer than 15 students, providing a visual baseline against which to compare the higher counts.
+
+By focusing on the purple bars, one can grasp the cumulative probability of encountering situations where the number of Wikipedia users meets or exceeds 15. This graphic presentation is particularly useful for understanding the tail behavior of the distribution at higher values. Such insights can be valuable in scenarios such as planning for educational tools and resources, where understanding student engagement at higher levels is crucial for effective implementation and support.
+
+### e. between 16 and 19, inclusive
+
+```{r}
+prob_between_16_19<-pbinom(19,n,p)-pbinom(15,n,p)
+prob_between_16_19
+```
+
+#### Interpretation
+
+If pbinom(19,n,p)−pbinom(15,n,p)=0.2544758, it indicates that, given the probability of success p for each individual trial, the cumulative probability of witnessing between 16 and 19 successes (students utilizing Wikipedia) out of a sample size of n students is roughly 0.2544758, or 25.45%. This suggests that in the provided sample, there is roughly a 25.45% chance of seeing between 16 and 19 pupils utilizing Wikipedia.
+
+Practically speaking, this indicates that, given the problem's stated sample size and conditions, there is a modest chance of running into this particular range of outcomes. This explanation sheds light on the possibility of seeing this specific range of accomplishments and emphasizes its importance in the probability distribution for various student Wikipedia usage counts.
+
+#### Visualizing the Probability
+
+```{r}
+library(ggplot2)
+
+# Assuming pmf_df is your data frame with columns wikipedia_users and pmf
+ggplot(pmf_df, aes(x = wikipedia_users, y = pmf, fill = (wikipedia_users >= 16 & wikipedia_users <= 19))) +
+  geom_bar(stat = "identity", width = 0.5) +
+  scale_fill_manual(values = c("gray", "purple"), 
+                    labels = c("Other values", "Values between 16 and 19"),
+                    guide = guide_legend(title = "Category")) +
+  labs(title = "Probability Mass Function (PMF) Highlighting P(16 ≤ X ≤ 19)",
+       subtitle = "Purple bars represent P(16 ≤ X ≤ 19)",
+       x = "Number of students using Wikipedia",
+       y = "Probability",
+       fill = "Category") +
+  theme_minimal() +
+  scale_x_continuous(breaks = seq(0, max(pmf_df$wikipedia_users), by = 5))  # Setting x-axis breaks
+
+```
+
+#### Interpreting the probabilities
+
+To understand the cumulative probability of having between 16 and 19 students using Wikipedia, the graph efficiently aggregates and displays the individual probabilities associated with each student count within this range. By highlighting the bars corresponding to 16, 17, 18, and 19 students in purple, the graph visually segments this subset from the rest of the data. To derive the cumulative probability of this specific event (P(16 ≤ X ≤ 19)), one would need to sum the probabilities of these four outcomes.
+
+The cumulative probability can be understood as the sum of the heights of the purple bars, offering an intuitive means of assessing the likelihood of encountering a group size within this defined range. Through this approach, the graph serves not only as a representation of the distribution but also as a practical tool for estimating cumulative probabilities within specific intervals, making complex statistical concepts more accessible.
+
+## Give the mean of X, denoted E(X).
+
+```{r}
+mean_X <- n * p
+mean_X
+```
+
+### Interpretation
+
+According to the results, 13.857 students out of 31 are estimated to have used Wikipedia as a source for their term papers on average, based on the expected value of the number of students using Wikipedia in a sample of size 31. Although a fraction of a student is not feasible in practice, this figure shows the theoretical average result over multiple survey iterations with the same sample size. Essentially, the average number of students accessing Wikipedia would tend to converge around 13.857 if the study were repeated with groups of n students.
+
+As a core trend, this predicted value shows the typical result while acknowledging that the actual number of pupils utilizing Wikipedia in each sample may vary around this mean.
+
+## Give the variance and standard deviation of X.
+
+```{r}
+variance_x<-n*p*(1-p)
+variance_x
+sd_x<-sqrt(variance_x)
+sd_x
+
+```
+
+### Interpretation
+
+n a sample of size n, the variance, calculated at roughly 7.662921, denotes the average squared deviation of the number of students utilizing Wikipedia from their expected value of approximately 13.857. This measure expresses the degree of variation or dispersion around the distribution mean value. In the meantime, a more comprehensible representation of this dispersion is provided by the standard deviation, which is estimated to be around 2.768198. It shows how far each individual observation deviates from the mean on average, giving a clear picture of how the data points are distributed around the average.
+
+In this particular situation, a standard deviation of 2.768198 indicates that there should be an average deviation of approximately 2.768198 units from the mean in the number of students utilizing Wikipedia.Together, these statistical variables express the level of uncertainty surrounding the number of students use Wikipedia within the given sample size and under the problem's defined criteria. Greater variability in the data is indicated by a higher variance and standard deviation, which highlights the significance of taking this variability into account in any analysis or decision-making process and reflects a wider range of possible outcomes.
