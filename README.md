@@ -1,7 +1,7 @@
 # Binomial-Probability-Distribution
 
 Author: Betelhem Getachew
-Date: April 10, 2024
+Date: July 10, 2024
 
 ## Project Overview
 This project analyzes a binomial probability distribution using data from a national study that found 44.7% of college students have used Wikipedia as a source in at least one term paper. The analysis includes calculating the Probability Mass Function (PMF) and Cumulative Distribution Function (CDF) for a sample of 31 students and visualizing these distributions.
