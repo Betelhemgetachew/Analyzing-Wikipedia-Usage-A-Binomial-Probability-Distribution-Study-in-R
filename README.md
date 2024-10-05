@@ -7,7 +7,7 @@ Date: July 10, 2024
 This project analyzes a binomial probability distribution using data from a national study that found 44.7% of college students have used Wikipedia as a source in at least one term paper. The analysis includes calculating the Probability Mass Function (PMF) and Cumulative Distribution Function (CDF) for a sample of 31 students and visualizing these distributions.
 
 ## Dataset Information
-Sample Size (n): 31 students
+Sample Size (n): 31 students  
 Probability of Success (p): 0.447 (students using Wikipedia)
 ## Key Components
 PMF (Probability Mass Function): This function describes the likelihood of observing a specific number of successes (students using Wikipedia) in the sample.
